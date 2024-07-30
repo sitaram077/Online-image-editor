@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <br><br>
+            <button type="submit" name="action" value="black_white">Convert to Black and White</button>
+            <button type="submit" name="action" value="sharpen">Increase Sharpness</button>
+            <button type="submit" name="action" value="pixelate">Pixelate</button>
+            <button type="submit" name="action" value="depixelate">Depixelate</button>
+        </form>
+        <br>
+        {% if uploaded_image %}
+        <h2>Uploaded Image</h2>
+        <img src="{{ url_for('static', filename='uploads/' ~ uploaded_image.split('/')[-1]) }}" alt="Uploaded Image">
+        <br>
+        {% endif %}
+        {% if edited_image %}
+        <h2>Edited Image</h2>
+        <img src="{{ url_for('static', filename='uploads/' ~ edited_image.split('/')[-1]) }}" alt="Edited Image">
+        {% endif %}
+    </div>
+</body>
+</html>
